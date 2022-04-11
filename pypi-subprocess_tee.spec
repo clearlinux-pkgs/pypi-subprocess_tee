@@ -4,31 +4,40 @@
 #
 Name     : pypi-subprocess_tee
 Version  : 0.3.5
-Release  : 3
+Release  : 4
 URL      : https://files.pythonhosted.org/packages/48/20/a38a078b58532bd44c4c189c85cc650268d1894a1dcc7080b6e7e9cfe7bb/subprocess-tee-0.3.5.tar.gz
 Source0  : https://files.pythonhosted.org/packages/48/20/a38a078b58532bd44c4c189c85cc650268d1894a1dcc7080b6e7e9cfe7bb/subprocess-tee-0.3.5.tar.gz
 Summary  : subprocess-tee
 Group    : Development/Tools
 License  : MIT
+Requires: pypi-subprocess_tee-license = %{version}-%{release}
 Requires: pypi-subprocess_tee-python = %{version}-%{release}
 Requires: pypi-subprocess_tee-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-BuildRequires : pypi(pluggy)
-BuildRequires : py-python
 BuildRequires : pypi(pip)
+BuildRequires : pypi(py)
 BuildRequires : pypi(setuptools)
 BuildRequires : pypi(setuptools_scm)
 BuildRequires : pypi(setuptools_scm_git_archive)
 BuildRequires : pypi(wheel)
-BuildRequires : pytest
-BuildRequires : tox
-BuildRequires : pypi(virtualenv)
+BuildRequires : pypi-pluggy
+BuildRequires : pypi-pytest
+BuildRequires : pypi-tox
+BuildRequires : pypi-virtualenv
 
 %description
 # subprocess-tee
 This package provides a drop-in alternative to `subprocess.run` that
 captures the output while still printing it in **real-time**, just the way
 `tee` does.
+
+%package license
+Summary: license components for the pypi-subprocess_tee package.
+Group: Default
+
+%description license
+license components for the pypi-subprocess_tee package.
+
 
 %package python
 Summary: python components for the pypi-subprocess_tee package.
@@ -58,7 +67,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1639057088
+export SOURCE_DATE_EPOCH=1649701554
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -73,6 +82,8 @@ python3 -m build --wheel --skip-dependency-check --no-isolation
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pypi-subprocess_tee
+cp %{_builddir}/subprocess-tee-0.3.5/LICENSE %{buildroot}/usr/share/package-licenses/pypi-subprocess_tee/3a8ca1ab43f7ee0b351aca14b5b2cda5ec3406e5
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -80,6 +91,10 @@ echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pypi-subprocess_tee/3a8ca1ab43f7ee0b351aca14b5b2cda5ec3406e5
 
 %files python
 %defattr(-,root,root,-)
