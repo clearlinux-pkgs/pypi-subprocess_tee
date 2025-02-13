@@ -7,7 +7,7 @@
 #
 Name     : pypi-subprocess_tee
 Version  : 0.4.2
-Release  : 19
+Release  : 20
 URL      : https://files.pythonhosted.org/packages/d7/22/991efbf35bc811dfe7edcd749253f0931d2d4838cf55176132633e1c82a7/subprocess_tee-0.4.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/d7/22/991efbf35bc811dfe7edcd749253f0931d2d4838cf55176132633e1c82a7/subprocess_tee-0.4.2.tar.gz
 Summary  : subprocess-tee
